@@ -52,4 +52,11 @@ public class CustomerController {
         model.addAttribute("customer", customerService.findById(id));
         return "delete";
     }
+
+    @PostMapping("customer/delete")
+    public String delete(Customer customer, RedirectAttributes redirect) {
+        customerService.remove(customer.getId());
+        redirect.addFlashAttribute("success", "Remove customer successfully!");
+        return "redirect:/";
+    }
 }
