@@ -30,7 +30,7 @@ public class CustomerController {
     public String save(Customer customer, RedirectAttributes redirect) {
         customer.setId((int) (Math.random() * 10000));
         customerService.save(customer);
-        redirect.addFlashAttribute("success", "Save customer success");
+        redirect.addFlashAttribute("success", "Save customer successfully!");
         return "redirect:/";
     }
 
@@ -38,5 +38,12 @@ public class CustomerController {
     public String edit(@PathVariable int id, Model model) {
         model.addAttribute("customer", customerService.findById(id));
         return "edit";
+    }
+
+    @PostMapping("/customer/update")
+    public String update(Customer customer, RedirectAttributes redirect) {
+        customerService.update(customer.getId(),customer);
+        redirect.addFlashAttribute("success", "Modified customer successfully!");
+        return "redirect:/";
     }
 }
